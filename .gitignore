@@ -26,3 +26,7 @@ __pycache__/
 *.pyc
 .venv/
 .venv_fi/
+api/debug/
+api/debug_frames/
+api/test/
+api/test_dataset/
