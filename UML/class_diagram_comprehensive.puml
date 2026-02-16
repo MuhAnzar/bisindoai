@@ -1,0 +1,485 @@
+@startuml class_diagram_comprehensive
+title Class Diagram Komprehensif: Sistem Pembelajaran BISINDO
+
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam linetype ortho
+skinparam shadowing false
+
+skinparam class {
+    BorderColor #333333
+    FontColor #333333
+}
+
+' ==========================================
+' STYLING - MODELS (GREEN)
+' ==========================================
+skinparam class<<Model>> {
+    BackgroundColor #90EE90
+    HeaderBackgroundColor #228B22
+    BorderColor #228B22
+}
+
+' ==========================================
+' STYLING - CONTROLLERS (BLUE)
+' ==========================================
+skinparam class<<Controller>> {
+    BackgroundColor #87CEEB
+    HeaderBackgroundColor #4682B4
+    BorderColor #4682B4
+}
+
+' ==========================================
+' STYLING - ADMIN CONTROLLERS (ORANGE)
+' ==========================================
+skinparam class<<AdminController>> {
+    BackgroundColor #FFE4B5
+    HeaderBackgroundColor #FF8C00
+    BorderColor #FF8C00
+}
+
+' ==========================================
+' STYLING - SERVICES (GRAY)
+' ==========================================
+skinparam class<<Service>> {
+    BackgroundColor #D3D3D3
+    HeaderBackgroundColor #696969
+    BorderColor #696969
+}
+
+' ==========================================
+' MODELS (10 Classes)
+' ==========================================
+package "Models" #E8F5E9 {
+    
+    class Pengguna <<Model>> {
+        +id: int
+        +nama: string
+        +email: string
+        +kata_sandi: string
+        +peran: enum
+        +email_terverifikasi_pada: datetime
+        +remember_token: string
+        +created_at: timestamp
+        +updated_at: timestamp
+        --
+        +casts()
+        +getAuthPassword()
+        +hasilKuis()
+        +practiceSessions()
+        +getHighestScoreAttribute()
+    }
+
+    class User <<Model>> {
+        +id: int
+        +name: string
+        +email: string
+        +password: string
+        +email_verified_at: datetime
+        +remember_token: string
+        --
+        +casts()
+    }
+
+    class PracticeSession <<Model>> {
+        +id: int
+        +user_id: int
+        +word: string
+        +duration: int
+        +accuracy_percentage: decimal
+        +completed_at: datetime
+        --
+        +user()
+        +getFormattedDurationAttribute()
+        +getAccuracyBadgeAttribute()
+    }
+
+    class Abjad <<Model>> {
+        +id: int
+        +huruf: string
+        +deskripsi: string
+        +berkas_video: string
+        --
+        +practices()
+    }
+
+    class KataDasar <<Model>> {
+        +id: int
+        +kata: string
+        +kategori: string
+        +arti: string
+        +berkas_video: string
+        --
+        +practices()
+    }
+
+    class Kuis <<Model>> {
+        +id: int
+        +judul: string
+        +deskripsi: string
+        +gambar_sampul: string
+        --
+        +pertanyaans()
+        +hasilKuis()
+    }
+
+    class Pertanyaan <<Model>> {
+        +id: int
+        +kuis_id: int
+        +pertanyaan: string
+        +media_url: string
+        +tipe_media: string
+        --
+        +kuis()
+        +opsiJawabans()
+    }
+
+    class OpsiJawaban <<Model>> {
+        +id: int
+        +pertanyaan_id: int
+        +teks_opsi: string
+        +is_benar: boolean
+        --
+        +pertanyaan()
+    }
+
+    class HasilKuis <<Model>> {
+        +id: int
+        +pengguna_id: int
+        +kuis_id: int
+        +skor: int
+        +total_benar: int
+        +tanggal_dikerjakan: datetime
+        --
+        +pengguna()
+        +kuis()
+    }
+
+    class ModeCard <<Model>> {
+        +id: int
+        +mode_key: string
+        +title: string
+        +description: string
+        +badge_text: string
+        +gradient_from: string
+        +gradient_to: string
+        +icon_type: string
+        +icon_content: text
+        +features: json
+        +button_text: string
+        +image: string
+        +is_active: boolean
+        +sort_order: int
+        --
+        +scopeActive()
+        +scopeOrdered()
+        +getDefaults()
+    }
+}
+
+' ==========================================
+' PUBLIC CONTROLLERS (6 Classes)
+' ==========================================
+package "Controllers" #BBDEFB {
+    
+    abstract class Controller <<Controller>> {
+    }
+
+    class HomeController <<Controller>> {
+        --
+        +index()
+    }
+
+    class DeteksiController <<Controller>> {
+        --
+        +index()
+        +predict()
+        +checkApiHealth()
+        +health()
+    }
+
+    class LatihanController <<Controller>> {
+        --
+        +deteksi()
+        +predict()
+        +saveSession()
+        +getHistory()
+    }
+
+    class KamusController <<Controller>> {
+        --
+        +indexAbjad()
+        +indexKataDasar()
+    }
+
+    class KuisController <<Controller>> {
+        --
+        +index()
+        +show()
+        +kerjakan()
+        +submit()
+        +hasil()
+        +riwayat()
+    }
+
+    class AutentikasiController <<Controller>> {
+        --
+        +showFormMasuk()
+        +masuk()
+        +showFormDaftar()
+        +daftar()
+        +keluar()
+    }
+}
+
+' ==========================================
+' ADMIN CONTROLLERS (10 Classes)
+' ==========================================
+package "Admin Controllers" #FFF3E0 {
+    
+    class DashboardAdminController <<AdminController>> {
+        --
+        +index()
+    }
+
+    class AnalitikAdminController <<AdminController>> {
+        --
+        +index()
+    }
+
+    class KontenAdminController <<AdminController>> {
+        --
+        +index()
+    }
+
+    class UserAdminController <<AdminController>> {
+        --
+        +index()
+        +create()
+        +store()
+        +edit()
+        +update()
+        +destroy()
+    }
+
+    class AbjadAdminController <<AdminController>> {
+        --
+        +index()
+        +create()
+        +store()
+        +edit()
+        +update()
+        +destroy()
+    }
+
+    class KataDasarAdminController <<AdminController>> {
+        --
+        +index()
+        +create()
+        +store()
+        +edit()
+        +update()
+        +destroy()
+    }
+
+    class KuisAdminController <<AdminController>> {
+        --
+        +index()
+        +create()
+        +store()
+        +edit()
+        +update()
+        +destroy()
+    }
+
+    class ModeCardAdminController <<AdminController>> {
+        --
+        +index()
+        +edit()
+        +update()
+        +removeImage()
+    }
+
+    class ModelController <<AdminController>> {
+        --
+        +index()
+        +update()
+    }
+
+    class PengaturanController <<AdminController>> {
+        --
+        +index()
+        +update()
+    }
+}
+
+' ==========================================
+' EXTERNAL SERVICES (Python Flask API)
+' ==========================================
+package "External Services (Python)" #F3E5F5 {
+    
+    class FlaskApp <<Service>> {
+        +app: Flask
+        +cors: CORS
+        +abjad_handler: AbjadModelHandler
+        +kata_handler: KataModelHandler
+        +nlg_handler: NLGHandler
+        --
+        +predict_abjad()
+        +predict_kata()
+        +reset_session()
+        +get_kata_classes()
+        +nlg_process()
+        +validate_structure_route()
+        +health()
+        +index()
+    }
+
+    class AbjadModelHandler <<Service>> {
+        +base_dir: string
+        +model_path: string
+        +labels_path: string
+        +model: KerasModel
+        +class_names: list
+        +IMG_SIZE: int
+        --
+        +load_resources()
+        +preprocess_image()
+        +predict()
+    }
+
+    class KataModelHandler <<Service>> {
+        +base_dir: string
+        +model_path: string
+        +model: KerasModel
+        +class_names: list
+        +mp_holistic: MediaPipe
+        +frame_buffer: deque
+        +state: string
+        --
+        +load_resources()
+        +get_classes()
+        +preprocess_image()
+        +process_buffer_from_results()
+        +run_inference()
+        +enhance_tta()
+        +ensemble_predictions()
+        +apply_temporal_smoothing()
+        +predict()
+        +reset_session()
+    }
+
+    class KataNLGHandler <<Service>> {
+        +labels: set
+        --
+        +process_kata()
+        +get_rich_feedback()
+    }
+
+    class KalimatNLGHandler <<Service>> {
+        +labels: set
+        --
+        +naturalize()
+        +analyze_sentiment()
+        +get_conversation_suggestions()
+        +validate_structure()
+    }
+}
+
+' ==========================================
+' MODEL RELATIONSHIPS
+' ==========================================
+
+' Pengguna relationships
+Pengguna "1" -- "0..*" PracticeSession : memiliki >
+Pengguna "1" -- "0..*" HasilKuis : mengerjakan >
+
+' Kuis relationships
+Kuis "1" -- "1..*" Pertanyaan : berisi >
+Kuis "1" -- "0..*" HasilKuis : menghasilkan >
+Pertanyaan "1" -- "2..*" OpsiJawaban : memiliki >
+
+' Practice relationships
+Abjad "1" -- "0..*" PracticeSession : dipraktekkan >
+KataDasar "1" -- "0..*" PracticeSession : dipraktekkan >
+
+' ==========================================
+' CONTROLLER INHERITANCE
+' ==========================================
+HomeController --|> Controller
+DeteksiController --|> Controller
+LatihanController --|> Controller
+KamusController --|> Controller
+KuisController --|> Controller
+AutentikasiController --|> Controller
+
+DashboardAdminController --|> Controller
+AnalitikAdminController --|> Controller
+KontenAdminController --|> Controller
+UserAdminController --|> Controller
+AbjadAdminController --|> Controller
+KataDasarAdminController --|> Controller
+KuisAdminController --|> Controller
+ModeCardAdminController --|> Controller
+ModelController --|> Controller
+PengaturanController --|> Controller
+
+' ==========================================
+' CONTROLLER DEPENDENCIES
+' ==========================================
+
+' Public Controllers -> Models
+HomeController ..> Pengguna
+HomeController ..> PracticeSession
+HomeController ..> Abjad
+HomeController ..> KataDasar
+
+DeteksiController ..> FlaskInferenceAPI
+
+LatihanController ..> PracticeSession
+LatihanController ..> ModeCard
+LatihanController ..> FlaskInferenceAPI
+
+KamusController ..> Abjad
+KamusController ..> KataDasar
+
+KuisController ..> Kuis
+KuisController ..> HasilKuis
+KuisController ..> Pertanyaan
+
+AutentikasiController ..> Pengguna
+
+' Admin Controllers -> Models
+DashboardAdminController ..> Pengguna
+DashboardAdminController ..> Abjad
+DashboardAdminController ..> KataDasar
+
+AnalitikAdminController ..> Pengguna
+AnalitikAdminController ..> Kuis
+AnalitikAdminController ..> HasilKuis
+AnalitikAdminController ..> KataDasar
+
+KontenAdminController ..> Abjad
+KontenAdminController ..> KataDasar
+KontenAdminController ..> PracticeSession
+
+UserAdminController ..> Pengguna
+
+AbjadAdminController ..> Abjad
+
+KataDasarAdminController ..> KataDasar
+
+KuisAdminController ..> Kuis
+KuisAdminController ..> Pertanyaan
+KuisAdminController ..> OpsiJawaban
+
+ModeCardAdminController ..> ModeCard
+
+' External Services relationships
+FlaskApp "1" -- "1" AbjadModelHandler : uses >
+FlaskApp "1" -- "1" KataModelHandler : uses >
+FlaskApp "1" -- "1" KalimatNLGHandler : uses >
+KalimatNLGHandler ..> KataNLGHandler : extends
+
+@enduml

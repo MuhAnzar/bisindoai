@@ -1,0 +1,81 @@
+@startuml model_deployment_sequence
+title Sequence Diagram: Deployment Model ke Laravel Backend
+
+skinparam backgroundColor #FEFEFE
+skinparam participant {
+    BackgroundColor #E3F2FD
+    BorderColor #1976D2
+    FontColor #0D47A1
+}
+
+actor Developer as dev
+participant "Training\nEnvironment" as training
+participant "Model Files\n(.h5 / .keras)" as model_files
+participant "Flask Server\n(Python)" as flask
+participant "Laravel App\n(PHP)" as laravel
+database "MySQL\nDatabase" as db
+actor "End User" as user
+
+== FASE 1: TRAINING MODEL ==
+dev -> training : Train CNN model\n(TensorFlow/Keras)
+activate training
+
+training -> training : Data preprocessing
+training -> training : Model architecture\n(CNN/CNN+LSTM)
+training -> training : Fit model
+training -> training : Evaluate model
+training -> model_files : model.save('model.h5')
+training -> model_files : Save label encoder\n(classes.json)
+deactivate training
+
+== FASE 2: SETUP FLASK INFERENCE SERVER ==
+dev -> flask : Deploy Flask app
+activate flask
+
+flask -> model_files : load_model('model.h5')
+flask -> model_files : Load classes.json
+flask -> flask : Initialize preprocessing\npipeline
+flask -> flask : Start server\n(localhost:5000)
+
+flask --> dev : Server ready
+deactivate flask
+
+== FASE 3: KONFIGURASI LARAVEL ==
+dev -> laravel : Configure .env
+activate laravel
+
+laravel -> laravel : Create InferenceService
+laravel -> laravel : Setup routes\n(/latihan/predict)
+laravel -> laravel : Create LatihanController
+laravel -> db : Run migrations\n(sessions, progress)
+
+laravel --> dev : Laravel configured
+deactivate laravel
+
+== FASE 4: RUNTIME INFERENCE ==
+user -> laravel : POST /latihan/predict\n{image, mode}
+activate laravel
+
+laravel -> laravel : Validate request
+laravel -> flask : HTTP POST /predict\n{image: base64, mode: abjad}
+activate flask
+
+flask -> flask : Decode base64
+flask -> flask : Preprocess image
+flask -> model_files : model.predict(tensor)
+model_files --> flask : prediction array
+flask -> flask : argmax, confidence
+flask -> flask : Generate NLG feedback
+
+flask --> laravel : {label, confidence,\nfeedback}
+deactivate flask
+
+laravel -> db : Save to session
+laravel -> db : Update user progress
+
+laravel --> user : JSON Response
+deactivate laravel
+
+user -> user : Display result
+
+@enduml

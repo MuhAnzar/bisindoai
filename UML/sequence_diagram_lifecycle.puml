@@ -1,0 +1,56 @@
+@startuml Sequence Diagram Lifecycle Deteksi (Alur Data)
+autonumber
+
+actor User
+participant "Browser (JS/MediaPipe)" as Browser
+participant "Python API (Flask)" as API
+participant "AI Model (TFLite)" as Model
+database Database
+
+note over Browser
+  Fase Input & Ekstraksi Client-side
+end note
+
+User -> Browser : Melakukan Gerakan Tangan
+activate Browser
+Browser -> Browser : Capture Video Frame
+Browser -> Browser : MediaPipe Extract Landmarks (x,y,z)
+
+note over API
+  Fase Integrasi & Prediksi
+end note
+
+Browser -> API : POST /predict-kata (Landmarks/Image)
+activate API
+API -> API : Preprocessing (Normalization)
+
+API -> Model : Invoke Interpreter (Input Tensor)
+activate Model
+Model --> API : Output Tensor (Probabilities)
+deactivate Model
+
+API -> API : Post-processing (Argmax/Threshold)
+
+note over API
+  Fase Feedback
+end note
+
+API --> Browser : JSON Response { "result": "Makan", "confidence": 0.95 }
+deactivate API
+
+Browser -> Browser : Render Skeleton & Teks Hasil
+Browser --> User : Tampilkan Feedback Visual
+deactivate Browser
+
+opt Jika Latihan Selesai
+    Browser -> API : POST /save-session
+    activate API
+    API -> Database : Store Session Data
+    activate Database
+    Database --> API : OK
+    deactivate Database
+    API --> Browser : Session Saved
+    deactivate API
+end
+
+@enduml

@@ -1,0 +1,163 @@
+@startuml model_embedding_flowchart
+title Flowchart: Alur Proses Inferensi Model CNN di Laravel
+
+skinparam backgroundColor #FEFEFE
+skinparam activity {
+    BackgroundColor #E3F2FD
+    BorderColor #1976D2
+    FontColor #0D47A1
+    DiamondBackgroundColor #FFF9C4
+    DiamondBorderColor #F9A825
+}
+
+|#E8F5E9|User/Frontend|
+|#E3F2FD|Laravel Backend|
+|#FFF3E0|Flask Inference API|
+|#F3E5F5|CNN Model|
+
+|User/Frontend|
+start
+:Pengguna membuka halaman
+/latihan/deteksi;
+
+:Pilih mode latihan
+(Abjad/Kata/Kalimat);
+
+:Aktivasi webcam
+dan mulai capture;
+
+:Capture frame video
+(convert to Base64);
+
+:Kirim request POST
+ke /latihan/predict;
+
+|Laravel Backend|
+:Route menerima request;
+
+:LatihanController::predict()
+memproses request;
+
+:Validasi input
+(image, mode);
+
+if (Input valid?) then (Ya)
+  :InferenceService
+  menyiapkan request;
+  
+  :Kirim HTTP POST ke
+  Flask API (localhost:5000);
+  
+  |Flask Inference API|
+  :Flask menerima request;
+  
+  :Decode Base64 image
+  ke numpy array;
+  
+  :Preprocessing Image
+  - Resize (224x224 / 64x64)
+  - Normalize (0-1)
+  - Expand dimensions;
+  
+  if (Mode = Abjad?) then (Ya)
+    |CNN Model|
+    :Load Model Abjad
+    (bisindo_model.h5);
+    
+    :Single frame prediction
+    model.predict(image);
+  else (Tidak - Kata/Kalimat)
+    |CNN Model|
+    :Load Model Kata
+    (kata_model.h5);
+    
+    :Sequence prediction
+    dengan LSTM layers;
+  endif
+  
+  |Flask Inference API|
+  :Ambil predicted class
+  dari argmax output;
+  
+  :Load label encoder
+  (classes.json);
+  
+  :Map index ke label
+  (A-Z atau Kata);
+  
+  :Hitung confidence score
+  (softmax probability);
+  
+  :Generate NLG feedback
+  berdasarkan hasil;
+  
+  :Buat JSON response;
+  
+  :Kirim response ke
+  Laravel backend;
+  
+  |Laravel Backend|
+  :Terima response dari
+  Flask API;
+  
+  if (Response sukses?) then (Ya)
+    :Parse JSON response;
+    
+    :Simpan ke session
+    (history prediksi);
+    
+    :Update statistik user
+    (jika login);
+    
+    :Return JSON ke frontend;
+  else (Tidak - Error)
+    :Log error;
+    
+    :Return error response
+    dengan fallback message;
+  endif
+  
+else (Tidak - Invalid)
+  :Return validation error
+  (422 Unprocessable);
+endif
+
+|User/Frontend|
+:Terima JSON response;
+
+:Parse response data;
+
+if (Prediksi berhasil?) then (Ya)
+  :Tampilkan hasil prediksi
+  di UI (huruf/kata);
+  
+  :Tampilkan confidence
+  score (progress bar);
+  
+  :Tampilkan NLG feedback
+  (tips dan motivasi);
+  
+  :Update history
+  sidebar;
+  
+  if (Lanjut latihan?) then (Ya)
+    :Capture frame
+    berikutnya;
+  else (Tidak)
+    :Akhiri sesi latihan;
+    
+    :Simpan progress
+    ke database;
+    
+    stop
+  endif
+else (Tidak - Error)
+  :Tampilkan pesan error;
+  
+  :Opsi retry atau
+  kembali ke menu;
+endif
+
+stop
+
+@enduml

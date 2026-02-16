@@ -1,0 +1,51 @@
+@startuml
+skinparam backgroundColor white
+
+|User|
+start
+:Login ke Aplikasi;
+:Masuk Dashboard;
+
+if (Pilih Menu?) then (Latihan)
+    :Pilih Mode Latihan;
+    :Izinkan Akses Kamera;
+    
+    repeat
+        :Lakukan Gerakan Isyarat;
+        |Sistem|
+        :Deteksi Gerakan (AI);
+        :Validasi Hasil;
+    |User|
+    repeat while (Belum Sesuai?) is (Ya)
+    
+    :Selesai Latihan;
+    |Sistem|
+    :Simpan Sesi ke Database;
+    :Tampilkan Hasil;
+
+elseif (Kuis)
+    |User|
+    :Pilih Paket Kuis;
+    :Kerjakan Soal;
+    :Submit Jawaban;
+    
+    |Sistem|
+    :Hitung Skor;
+    :Simpan Hasil;
+    :Tampilkan Nilai;
+
+else (Admin)
+    |Admin|
+    :Masuk Halaman Admin;
+    fork
+        :Manajemen User;
+    fork again
+        :Manajemen Konten (Kamus);
+    fork again
+        :Manajemen Kuis;
+    end fork
+    :Update Database;
+endif
+
+stop
+@enduml

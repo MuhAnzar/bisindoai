@@ -1,0 +1,100 @@
+@startuml model_inference_component
+title Component Diagram: Arsitektur Sistem Inferensi Model
+
+skinparam backgroundColor #FEFEFE
+skinparam component {
+    BackgroundColor #E3F2FD
+    BorderColor #1976D2
+}
+skinparam package {
+    BackgroundColor #FAFAFA
+    BorderColor #78909C
+}
+
+' ========== FRONTEND PACKAGE ==========
+package "Frontend (Browser)" as frontend #E8F5E9 {
+    component [Blade View\ndeteksi.blade.php] as blade_view
+    component [JavaScript\nWebcam Handler] as webcam_js
+    component [Fetch API\nHTTP Client] as fetch_api
+    
+    blade_view --> webcam_js
+    webcam_js --> fetch_api
+}
+
+' ========== LARAVEL BACKEND PACKAGE ==========
+package "Laravel Backend (PHP)" as backend #E3F2FD {
+    
+    package "Routing" as routing {
+        component [web.php] as web_routes
+        component [api.php] as api_routes
+    }
+    
+    package "HTTP Controllers" as controllers {
+        component [LatihanController] as latihan_ctrl
+        component [SessionController] as session_ctrl
+    }
+    
+    package "Services" as services {
+        component [InferenceService] as inference_svc
+        component [NLGService] as nlg_svc
+    }
+    
+    package "Models (Eloquent)" as models {
+        component [User] as user_model
+        component [Session] as session_model
+        component [Progress] as progress_model
+    }
+    
+    routing --> controllers
+    controllers --> services
+    controllers --> models
+}
+
+' ========== FLASK INFERENCE PACKAGE ==========
+package "Flask Inference API (Python)" as flask_api #FFF3E0 {
+    
+    component [Flask App\napp.py] as flask_app
+    
+    package "Preprocessing" as preprocess_pkg {
+        component [Image Decoder] as img_decoder
+        component [Normalizer] as normalizer
+        component [Tensor Builder] as tensor_builder
+    }
+    
+    package "Model Handler" as model_handler_pkg {
+        component [Model Loader] as model_loader
+        component [Predictor] as predictor
+        component [Label Mapper] as label_mapper
+    }
+    
+    package "Response Generator" as response_gen {
+        component [NLG Engine] as nlg_engine
+        component [JSON Builder] as json_builder
+    }
+    
+    flask_app --> preprocess_pkg
+    preprocess_pkg --> model_handler_pkg
+    model_handler_pkg --> response_gen
+}
+
+' ========== MODEL STORAGE PACKAGE ==========
+package "Model Storage" as model_storage #F3E5F5 {
+    component [bisindo_model.h5\n(Abjad CNN)] as abjad_model
+    component [kata_model.h5\n(Kata CNN+LSTM)] as kata_model
+    component [classes.json\n(Label Encoder)] as classes_json
+}
+
+' ========== DATABASE PACKAGE ==========
+package "Database (MySQL)" as database #ECEFF1 {
+    database "users" as users_table
+    database "sessions" as sessions_table
+    database "progress" as progress_table
+}
+
+' ========== CONNECTIONS ==========
+fetch_api ..> routing : POST /latihan/predict
+services ..> flask_app : HTTP POST /predict
+model_loader ..> model_storage : Load .h5 files
+models ..> database : SQL Queries
+
+@enduml

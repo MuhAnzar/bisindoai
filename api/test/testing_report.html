@@ -1,0 +1,716 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Testing Report</title>
+    
+<style>
+    @page {
+        size: A4 landscape;
+        margin: 1.5cm;
+    }
+    body {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 9pt; /* Smaller font for table fit */
+        line-height: 1.3;
+    }
+    h1 {
+        font-size: 16pt;
+        color: #0f766e;
+        border-bottom: 2px solid #0f766e;
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+    }
+    h2 {
+        font-size: 13pt;
+        color: #0f766e;
+        margin-top: 15px;
+        margin-bottom: 8px;
+        border-bottom: 1px solid #ddd;
+    }
+    table {
+        width: 100%;
+        border: 0.5px solid #999;
+        border-collapse: collapse;
+        margin-bottom: 15px;
+    }
+    th {
+        background-color: #f0fdfa;
+        color: #0d9488;
+        font-weight: bold;
+        border: 0.5px solid #999;
+        padding: 5px;
+        font-size: 8pt;
+        vertical-align: top;
+    }
+    td {
+        border: 0.5px solid #999;
+        padding: 5px;
+        font-size: 8pt;
+        vertical-align: top;
+    }
+    /* Specific column adjustments could be added here if needed, but Landscape should solve most issues */
+    tr:nth-child(even) {
+        background-color: #f9fafb;
+    }
+    p {
+        margin-bottom: 10px;
+    }
+    code {
+        background-color: #f1f5f9;
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-family: Courier New, monospace;
+    }
+</style>
+
+</head>
+<body>
+    <h1>Templat Pengujian (Test Scripts)</h1>
+<p>Dokumen ini berisi tabel pengujian lengkap yang siap digunakan untuk verifikasi manual. Kolom <strong>Hasil</strong> dan <strong>Catatan</strong> dikosongkan agar Anda dapat mengisinya saat melakukan pengujian.</p>
+<h2>1. Pengujian Black Box (Fungsionalitas Sistem)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">ID</th>
+<th style="text-align: left;">Fitur</th>
+<th style="text-align: left;">Skenario Uji</th>
+<th style="text-align: left;">Langkah Pengujian</th>
+<th style="text-align: left;">Hasil yang Diharapkan</th>
+<th style="text-align: left;">Status (Pass/Fail)</th>
+<th style="text-align: left;">Catatan / Temuan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>A. MANAJEMEN AKUN</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">A1</td>
+<td style="text-align: left;">Login</td>
+<td style="text-align: left;">Login dengan kredensial valid</td>
+<td style="text-align: left;">1. Buka halaman login<br>2. Masukkan email &amp; password benar<br>3. Klik Login</td>
+<td style="text-align: left;">Masuk ke dashboard user</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">A2</td>
+<td style="text-align: left;">Login</td>
+<td style="text-align: left;">Login dengan password salah</td>
+<td style="text-align: left;">1. Buka halaman login<br>2. Masukkan email benar &amp; password salah<br>3. Klik Login</td>
+<td style="text-align: left;">Muncul pesan error "Password salah"</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">A3</td>
+<td style="text-align: left;">Logout</td>
+<td style="text-align: left;">Logout dari sistem</td>
+<td style="text-align: left;">1. Klik ikon profil<br>2. Klik tombol Logout</td>
+<td style="text-align: left;">Kembali ke halaman login</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>B. NAVIGASI</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">B1</td>
+<td style="text-align: left;">Sidebar</td>
+<td style="text-align: left;">Akses Menu "Latihan"</td>
+<td style="text-align: left;">Klik menu "Latihan" di sidebar</td>
+<td style="text-align: left;">Halaman Latihan terbuka</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">B2</td>
+<td style="text-align: left;">Sidebar</td>
+<td style="text-align: left;">Akses Menu "Riwayat"</td>
+<td style="text-align: left;">Klik menu "Riwayat" di sidebar</td>
+<td style="text-align: left;">Halaman Riwayat terbuka</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>C. MODE LATIHAN (CORE)</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">C1</td>
+<td style="text-align: left;">Setup Kamera</td>
+<td style="text-align: left;">Izin Kamera</td>
+<td style="text-align: left;">Buka halaman latihan</td>
+<td style="text-align: left;">Browser meminta izin akses kamera</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">C2</td>
+<td style="text-align: left;">Setup Kamera</td>
+<td style="text-align: left;">Tampilan Video</td>
+<td style="text-align: left;">Izinkan akses kamera</td>
+<td style="text-align: left;">Video feed tampil di layar</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">C3</td>
+<td style="text-align: left;">Mode Abjad</td>
+<td style="text-align: left;">Switch Mode</td>
+<td style="text-align: left;">Klik tab "Abjad"</td>
+<td style="text-align: left;">UI input teks muncul (A-Z)</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">C4</td>
+<td style="text-align: left;">Mode Abjad</td>
+<td style="text-align: left;">Input Validasi</td>
+<td style="text-align: left;">Ketik angka "123"</td>
+<td style="text-align: left;">Input menolak angka (validasi A-Z only)</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">C5</td>
+<td style="text-align: left;">Mode Kata</td>
+<td style="text-align: left;">Switch Mode</td>
+<td style="text-align: left;">Klik tab "Kata"</td>
+<td style="text-align: left;">Grid kartu kata muncul</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">C6</td>
+<td style="text-align: left;">Mode Kata</td>
+<td style="text-align: left;">Multi-select</td>
+<td style="text-align: left;">Klik 3 kartu kata berbeda</td>
+<td style="text-align: left;">Tombol mulai menunjukkan "(3) item"</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">C7</td>
+<td style="text-align: left;">Mode Kalimat</td>
+<td style="text-align: left;">Switch Mode</td>
+<td style="text-align: left;">Klik tab "Kalimat"</td>
+<td style="text-align: left;">UI penyusun kalimat (word builder) muncul</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">C8</td>
+<td style="text-align: left;">Mode Kalimat</td>
+<td style="text-align: left;">Tambah Kata</td>
+<td style="text-align: left;">Klik kartu kata di picker</td>
+<td style="text-align: left;">Kata masuk ke baris kalimat</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">C9</td>
+<td style="text-align: left;">Mode Kalimat</td>
+<td style="text-align: left;">Tambah Ejaan</td>
+<td style="text-align: left;">Ketik manual dan enter</td>
+<td style="text-align: left;">Ejaan per huruf masuk ke baris kalimat</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>D. PROSES DETEKSI (AI)</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">D1</td>
+<td style="text-align: left;">Visualisasi</td>
+<td style="text-align: left;">Skeleton Hand (Kata)</td>
+<td style="text-align: left;">Gerakkan tangan cepat di Mode Kata</td>
+<td style="text-align: left;">Garis skeleton mengikuti tangan tanpa lag</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">D2</td>
+<td style="text-align: left;">Feedback</td>
+<td style="text-align: left;">Deteksi Benar</td>
+<td style="text-align: left;">Isyaratkan kata target dengan benar</td>
+<td style="text-align: left;">Visual feedback hijau &amp; lanjut ke kata berikutnya</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">D3</td>
+<td style="text-align: left;">Feedback</td>
+<td style="text-align: left;">Deteksi Salah</td>
+<td style="text-align: left;">Isyaratkan kata sembarang</td>
+<td style="text-align: left;">Visual feedback salah/tidak ada respon</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">D4</td>
+<td style="text-align: left;">Komplesi</td>
+<td style="text-align: left;">Selesai Latihan</td>
+<td style="text-align: left;">Selesaikan semua target kata</td>
+<td style="text-align: left;">Modal "Latihan Selesai" &amp; Skor muncul</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>E. RIWAYAT</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">E1</td>
+<td style="text-align: left;">Pencatatan</td>
+<td style="text-align: left;">Simpan Data</td>
+<td style="text-align: left;">Selesaikan latihan</td>
+<td style="text-align: left;">Data sesi baru muncul di database/tabel</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">E2</td>
+<td style="text-align: left;">Tampilan</td>
+<td style="text-align: left;">Badge Akurasi</td>
+<td style="text-align: left;">Buka menu Riwayat</td>
+<td style="text-align: left;">Sesi terakhir tampil dengan badge (Excellent/Good)</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>F. VALIDASI INPUT</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">F1</td>
+<td style="text-align: left;">Input Abjad</td>
+<td style="text-align: left;">Huruf Kecil</td>
+<td style="text-align: left;">Masukkan huruf "a, b, c" (kecil) pada mode Abjad</td>
+<td style="text-align: left;">Sistem otomatis mengonversi menjadi kapital "A, B, C"</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">F2</td>
+<td style="text-align: left;">Input Abjad</td>
+<td style="text-align: left;">Angka &amp; Simbol</td>
+<td style="text-align: left;">Ketik "123!@#" pada input teks</td>
+<td style="text-align: left;">Input ditolak atau tidak muncul di layar (Input sanitization)</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">F3</td>
+<td style="text-align: left;">Input Abjad</td>
+<td style="text-align: left;">Input Kosong</td>
+<td style="text-align: left;">Kosongkan kolom input lalu klik "Mulai"</td>
+<td style="text-align: left;">Muncul pesan error/toast "Masukkan kata target!"</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">F4</td>
+<td style="text-align: left;">Input Abjad</td>
+<td style="text-align: left;">Spasi</td>
+<td style="text-align: left;">Ketik "A B" (dengan spasi)</td>
+<td style="text-align: left;">Spasi dihapus atau diabaikan (hanya huruf)</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">F5</td>
+<td style="text-align: left;">Input Kata</td>
+<td style="text-align: left;">Kata Tidak Valid</td>
+<td style="text-align: left;">Ketik kata manual yang tidak ada di database (Cth: "Xyzz")</td>
+<td style="text-align: left;">Tombol mulai disable &amp; Error "Kata tidak tersedia"</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">F6</td>
+<td style="text-align: left;">Input Kalimat</td>
+<td style="text-align: left;">Format Campuran</td>
+<td style="text-align: left;">Masukkan kombinasi Kata + Ejaan</td>
+<td style="text-align: left;">Sistem menerima keduanya dalam satu baris kalimat</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Pengujian Model (Akurasi Deteksi)</h2>
+<p>Gunakan tabel ini untuk mencatat hasil uji coba manual terhadap setiap kelas kata/huruf. Beri tanda centang (✅) jika berhasil atau silang (❌) jika gagal, dan tuliskan alasannya.</p>
+<h3>A. Pengujian Huruf (Abjad Mode)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Huruf</th>
+<th style="text-align: left;">Hasil (✅/❌)</th>
+<th style="text-align: left;">Keterangan (Cth: Sulit, Tertukar dengan A, Cahaya kurang)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">B</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">C</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">D</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">E</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">G</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">H</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">I</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">K</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">L</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">O</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">P</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Q</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">S</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">T</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">U</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">V</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">X</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Y</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Z</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<h3>B. Pengujian Kata (Kata Mode) &amp; Kalimat</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">No</th>
+<th style="text-align: left;">Kata Target</th>
+<th style="text-align: left;">Hasil (✅/❌)</th>
+<th style="text-align: left;">Isu yang Ditemukan (Cth: Landmark tidak stabil, Perlu 2 tangan)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Selamat Pagi</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Selamat Siang</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Selamat Malam</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">Terima Kasih</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">Sama-Sama</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">Maaf</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">Tolong</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">Saya</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">Kamu</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">Dia</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">11</td>
+<td style="text-align: left;">Siapa</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">Apa</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">13</td>
+<td style="text-align: left;">Kapan</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">Di mana</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">Mengapa</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">Bagaimana</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">17</td>
+<td style="text-align: left;">Makan</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">18</td>
+<td style="text-align: left;">Minum</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">19</td>
+<td style="text-align: left;">Tidur</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">20</td>
+<td style="text-align: left;">Belajar</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">21</td>
+<td style="text-align: left;">Bekerja</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">22</td>
+<td style="text-align: left;">Bermain</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">23</td>
+<td style="text-align: left;">Rumah</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">Sekolah</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">25</td>
+<td style="text-align: left;">Kantor</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">26</td>
+<td style="text-align: left;">Ibu</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">27</td>
+<td style="text-align: left;">Ayah</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">28</td>
+<td style="text-align: left;">Kakak</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">29</td>
+<td style="text-align: left;">Adik</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">30</td>
+<td style="text-align: left;">Teman</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">...</td>
+<td style="text-align: left;"><em>(Tambah baris)</em></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

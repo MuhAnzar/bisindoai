@@ -1,0 +1,186 @@
+﻿===========================================================================
+  SKENARIO 3: EVALUASI BLEU SCORE - NLG MODE KALIMAT
+  Menggunakan SELURUH 26 Label Kata BISINDO
+===========================================================================
+
+Γ£à KalimatNLGHandler initialized (26 labels)
+   Labels: Apa, Apa Kabar, Bagaimana, Baik, Belajar, Berapa, Bingung, Dia, Halo, Kamu...
+
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  ≡ƒôù A. KALIMAT TERSTRUKTUR (30 Test Cases)
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  No   Input Tokens                   Output NLG                           BLEU-1  BLEU-2
+  ΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  1    ['Saya', 'Makan']              Saya makan.                          1.0000  1.0000
+  2    ['Saya', 'Belajar']            Saya belajar.                        1.0000  1.0000
+  3    ['Saya', 'Tidur']              Saya tidur.                          1.0000  1.0000
+  4    ['Saya', 'Menulis']            Saya menulis.                        1.0000  1.0000
+  5    ['Saya', 'Melihat']            Saya melihat.                        1.0000  1.0000
+  6    ['Dia', 'Makan']               Dia makan.                           1.0000  1.0000
+  7    ['Dia', 'Belajar']             Dia belajar.                         1.0000  1.0000
+  8    ['Dia', 'Tidur']               Dia tidur.                           1.0000  1.0000
+  9    ['Kamu', 'Menulis']            Kamu menulis.                        1.0000  1.0000
+  10   ['Kamu', 'Melihat']            Kamu melihat.                        1.0000  1.0000
+  11   ['Saya', 'Baik']               Saya baik.                           1.0000  1.0000
+  12   ['Saya', 'Bingung']            Saya bingung.                        1.0000  1.0000
+  13   ['Saya', 'Marah']              Saya marah.                          1.0000  1.0000
+  14   ['Dia', 'Sabar']               Dia sabar.                           1.0000  1.0000
+  15   ['Kamu', 'Tuli']               Kamu tuli.                           1.0000  1.0000
+  16   ['Dia', 'Tinggi']              Dia tinggi.                          1.0000  1.0000
+  17   ['Halo', 'Apa', 'Kabar']       Halo! Sabar apa?                     0.6667  0.1826
+  18   ['Selamat', 'Pagi']            Selamat pagi!                        1.0000  1.0000
+  19   ['Selamat', 'Siang']           Selamat siang!                       1.0000  1.0000
+  20   ['Selamat', 'Sore']            Selamat sore!                        1.0000  1.0000
+  21   ['Selamat', 'Malam']           Selamat malam!                       1.0000  1.0000
+  22   ['Terima', 'Kasih']            Terima kasih!                        1.0000  1.0000
+  23   ['Apa', 'Kabar']               Sabar apa?                           0.5000  0.2236
+  24   ['Siapa', 'Dia']               Siapa dia?                           1.0000  1.0000
+  25   ['Bagaimana', 'Kamu']          Bagaimana?                           0.3679  0.1163
+  26   ['Berapa', 'Tinggi', 'Kamu']   Berapa tinggi kamu?                  1.0000  1.0000
+  27   ['Maaf', 'Saya', 'Bingung']    Maaf, saya bingung.                  1.0000  1.0000
+  28   ['Dia', 'Melihat', 'Kamu']     Dia melihat. Kamu.                   1.0000  1.0000
+  29   ['Saya', 'Makan', 'Baik']      Saya makan baik.                     1.0000  1.0000
+  30   ['Halo', 'Saya', 'Belajar']    Halo! Saya belajar.                  1.0000  1.0000
+
+  ≡ƒôè Average BLEU-1: 0.9512  |  Average BLEU-2: 0.9174  (30 test cases)
+
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  ≡ƒöÇ B. KALIMAT ACAK / TIDAK TERSTRUKTUR (25 Test Cases)
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  No   Input Tokens                   Output NLG                           BLEU-1  BLEU-2
+  ΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  1    ['Makan', 'Saya']              Saya makan.                          1.0000  1.0000
+  2    ['Belajar', 'Dia']             Dia belajar.                         1.0000  1.0000
+  3    ['Tidur', 'Kamu']              Kamu tidur.                          1.0000  1.0000
+  4    ['Menulis', 'Saya']            Saya menulis.                        1.0000  1.0000
+  5    ['Melihat', 'Dia']             Dia melihat.                         1.0000  1.0000
+  6    ['Baik', 'Saya']               Saya baik.                           1.0000  1.0000
+  7    ['Bingung', 'Dia']             Dia bingung.                         1.0000  1.0000
+  8    ['Marah', 'Kamu']              Kamu marah.                          1.0000  1.0000
+  9    ['Sabar', 'Saya']              Saya sabar.                          1.0000  1.0000
+  10   ['Tuli', 'Dia']                Dia tuli.                            1.0000  1.0000
+  11   ['Tinggi', 'Kamu']             Kamu tinggi.                         1.0000  1.0000
+  12   ['Kamu', 'Apa']                Apa?                                 0.3679  0.1163
+  13   ['Dia', 'Siapa']               Siapa dia?                           1.0000  1.0000
+  14   ['Kamu', 'Bagaimana']          Bagaimana?                           0.3679  0.1163
+  15   ['Kasih', 'Terima']                                                 0.0000  0.0000
+  16   ['Pagi', 'Selamat']                                                 0.0000  0.0000
+  17   ['Siang', 'Selamat']                                                0.0000  0.0000
+  18   ['Sore', 'Selamat']                                                 0.0000  0.0000
+  19   ['Malam', 'Selamat']                                                0.0000  0.0000
+  20   ['Kabar', 'Apa']               Sabar apa?                           0.5000  0.2236
+  21   ['Bingung', 'Saya', 'Maaf']    Maaf, saya bingung.                  1.0000  1.0000
+  22   ['Kamu', 'Melihat', 'Dia']     Kamu melihat. Dia.                   1.0000  1.0000
+  23   ['Tinggi', 'Berapa', 'Dia']    Berapa tinggi dia?                   1.0000  1.0000
+  24   ['Belajar', 'Halo', 'Saya']    Halo! Saya belajar.                  1.0000  1.0000
+  25   ['Makan', 'Dia', 'Apa']        Dia makan apa?                       1.0000  1.0000
+
+  ≡ƒôè Average BLEU-1: 0.7294  |  Average BLEU-2: 0.6983  (25 test cases)
+
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  ≡ƒöñ C. KATA TUNGGAL - SEMUA 26 LABEL (26 Test Cases)
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  No   Input Tokens                   Output NLG                           BLEU-1  BLEU-2
+  ΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  1    ['Halo']                       Halo!                                1.0000  0.3162
+  2    ['Makan']                      Makan.                               1.0000  0.3162
+  3    ['Belajar']                    Belajar.                             1.0000  0.3162
+  4    ['Tidur']                      Tidur.                               1.0000  0.3162
+  5    ['Menulis']                    Menulis.                             1.0000  0.3162
+  6    ['Melihat']                    Melihat.                             1.0000  0.3162
+  7    ['Saya']                       Saya.                                1.0000  0.3162
+  8    ['Kamu']                       Kamu.                                1.0000  0.3162
+  9    ['Dia']                        Dia.                                 1.0000  0.3162
+  10   ['Baik']                       Baik.                                1.0000  0.3162
+  11   ['Bingung']                    Bingung.                             1.0000  0.3162
+  12   ['Marah']                      Marah.                               1.0000  0.3162
+  13   ['Sabar']                      Sabar.                               1.0000  0.3162
+  14   ['Tinggi']                     Tinggi.                              1.0000  0.3162
+  15   ['Tuli']                       Tuli.                                1.0000  0.3162
+  16   ['Apa']                        Apa?                                 1.0000  0.3162
+  17   ['Siapa']                      Siapa?                               1.0000  0.3162
+  18   ['Bagaimana']                  Bagaimana?                           1.0000  0.3162
+  19   ['Berapa']                     Berapa?                              1.0000  0.3162
+  20   ['Apa Kabar']                  Apa kabar?                           1.0000  1.0000
+  21   ['Terima Kasih']               Terima kasih!                        1.0000  1.0000
+  22   ['Selamat Pagi']               Selamat pagi!                        1.0000  1.0000
+  23   ['Selamat Siang']              Selamat siang!                       1.0000  1.0000
+  24   ['Selamat Sore']               Selamat sore!                        1.0000  1.0000
+  25   ['Selamat Malam']              Selamat malam!                       1.0000  1.0000
+  26   ['maaf']                       Maaf.                                1.0000  0.3162
+
+  ≡ƒôè Average BLEU-1: 1.0000  |  Average BLEU-2: 0.4740  (26 test cases)
+
+===========================================================================
+  ≡ƒôè RINGKASAN EVALUASI BLEU - SKENARIO 3 (SEMUA LABEL)
+===========================================================================
+
+  Kategori                                         N     BLEU-1     BLEU-2
+  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  A. Kalimat Terstruktur                          30     0.9512     0.9174
+  B. Kalimat Acak                                 25     0.7294     0.6983
+  C. Kata Tunggal (Semua 26 Label)                26     1.0000     0.4740
+  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  OVERALL AVERAGE                                 81     0.8984     0.7074
+
+  ≡ƒôï Cakupan Label:
+     Total label kata:     26
+     Label tercakup:       26
+     Γ£à SEMUA 26 LABEL TERCAKUP!
+
+  Interpretasi BLEU Score:
+  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  0.0 - 0.1  : Sangat rendah
+  0.1 - 0.3  : Rendah
+  0.3 - 0.5  : Cukup baik
+  0.5 - 0.7  : Baik
+  0.7 - 1.0  : Sangat baik
+
+  ΓöîΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÉ
+  Γöé  Kualitas NLG Mode Kalimat: SANGAT BAIK Γ£àΓöé
+  Γöé  Overall BLEU-1: 0.8984                 Γöé
+  Γöé  Overall BLEU-2: 0.7074                 Γöé
+  Γöé  Total Test Cases: 81                   Γöé
+  ΓööΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÿ
+
+  ΓÜá∩╕Å  Test cases dengan BLEU-1 < 0.3 (5 kasus):
+      Input:    ['Kasih', 'Terima']
+      Output:   (kosong)
+      Expected: "Terima kasih!"
+      BLEU-1:   0.0000
+
+      Input:    ['Pagi', 'Selamat']
+      Output:   (kosong)
+      Expected: "Selamat pagi!"
+      BLEU-1:   0.0000
+
+      Input:    ['Siang', 'Selamat']
+      Output:   (kosong)
+      Expected: "Selamat siang!"
+      BLEU-1:   0.0000
+
+      Input:    ['Sore', 'Selamat']
+      Output:   (kosong)
+      Expected: "Selamat sore!"
+      BLEU-1:   0.0000
+
+      Input:    ['Malam', 'Selamat']
+      Output:   (kosong)
+      Expected: "Selamat malam!"
+      BLEU-1:   0.0000
+
+  ≡ƒôè Statistik Tambahan:
+     Perfect BLEU-1 (ΓëÑ0.99): 70/81 (86.4%)
+     BLEU-1 ΓëÑ 0.5:          73/81
+     BLEU-1 < 0.3:          5/81
+
+===========================================================================
+  Evaluasi BLEU Mode Kalimat selesai!
+===========================================================================
+
+  ≡ƒôê Chart saved: C:\laragon\www\BisindoCNNfi\api\bleu_per_kategori.png
+  ≡ƒôê Chart saved: C:\laragon\www\BisindoCNNfi\api\bleu_per_testcase.png
+  ≡ƒôê Chart saved: C:\laragon\www\BisindoCNNfi\api\bleu_distribusi.png
+  ≡ƒôê Chart saved: C:\laragon\www\BisindoCNNfi\api\bleu_line_chart.png
+
+  Γ£à Semua grafik BLEU berhasil disimpan!

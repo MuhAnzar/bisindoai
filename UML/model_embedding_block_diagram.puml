@@ -1,0 +1,100 @@
+@startuml model_embedding_block_diagram
+title Block Diagram: Integrasi Model CNN ke Laravel Backend
+
+' Styling
+skinparam backgroundColor #FEFEFE
+skinparam componentStyle rectangle
+skinparam component {
+    BackgroundColor #E3F2FD
+    BorderColor #546E7A
+    FontColor #37474F
+}
+
+skinparam rectangle {
+    BackgroundColor #FFFFFF
+    BorderColor #78909C
+    RoundCorner 20
+}
+
+skinparam arrow {
+    Color #546E7A
+}
+
+' ========== USER LAYER ==========
+rectangle "USER LAYER" as user_layer #E8F5E9 {
+    component [Pengguna\n(Browser/Mobile)] as user
+    component [Webcam/Kamera\nCapture Video Frame] as camera
+}
+
+' ========== PRESENTATION LAYER ==========
+rectangle "PRESENTATION LAYER" as presentation_layer #E3F2FD {
+    component [Laravel Frontend\n(Blade Views)] as blade
+    component [JavaScript Client\n(Fetch API/Axios)] as js_client
+}
+
+' ========== APPLICATION LAYER ==========
+rectangle "APPLICATION LAYER (Laravel)" as app_layer #BBDEFB {
+    component [Routes\n(web.php / api.php)] as routes
+    component [LatihanController\ndeteksi() / predict()] as controller
+    component [InferenceService\nconnectToFlask()] as inference_service
+    component [SessionManager\nsaveSession() / getHistory()] as session_mgr
+}
+
+' ========== INFERENCE LAYER ==========
+rectangle "INFERENCE LAYER (Flask API)" as inference_layer #FFF3E0 {
+    component [Flask Server\nREST API Endpoint] as flask
+    component [Preprocessing\nResize, Normalize, Augment] as preprocess
+    component [Model Loader\nload_model()] as model_loader
+    component [Prediction Engine\nmodel.predict()] as prediction
+    component [NLG Response\nGenerate Feedback] as nlg
+}
+
+' ========== MODEL LAYER ==========
+rectangle "MODEL LAYER" as model_layer #F3E5F5 {
+    component [Model Abjad\n(CNN .h5 / .keras)] as model_abjad
+    component [Model Kata\n(CNN+LSTM .h5 / .keras)] as model_kata
+    component [Label Encoder\n(classes.json)] as labels
+}
+
+' ========== STORAGE LAYER ==========
+rectangle "STORAGE LAYER" as storage_layer #ECEFF1 {
+    database "MySQL Database\n(sessions, users, progress)" as db
+    storage "File Storage\n(uploaded media)" as file_storage
+}
+
+' ========== CONNECTIONS ==========
+' User Flow
+user --> camera : Aktivasi Kamera
+camera --> js_client : Video Frames (Base64)
+
+' Presentation to Application
+js_client --> routes : POST /latihan/predict
+blade <--> routes : GET /latihan/deteksi
+
+' Application Layer
+routes --> controller
+controller --> inference_service : Forward Request
+controller --> session_mgr : Save/Load Session
+session_mgr --> db
+
+' Inference Communication
+inference_service --> flask : HTTP POST\n(JSON: image, mode)
+
+' Flask Processing
+flask --> preprocess : Raw Image
+preprocess --> model_loader : Preprocessed Tensor
+model_loader --> model_abjad : Mode: abjad
+model_loader --> model_kata : Mode: kata
+model_loader --> labels : Load Classes
+model_loader --> prediction : Ready Model
+prediction --> nlg : Prediction Result
+nlg --> flask : JSON Response
+
+' Response Flow
+flask --> inference_service : Prediction + Confidence + Feedback
+inference_service --> controller
+controller --> js_client : JSON Response
+js_client --> blade : Update UI
+blade --> user : Display Result
+
+@enduml

@@ -1,0 +1,159 @@
+@startuml class_diagram_skripsi
+
+' Konfigurasi Tampilan Akademik
+skinparam backgroundColor White
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam linetype ortho
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam nodesep 100
+skinparam ranksep 80
+
+' Styling Class berdasarkan Kelompok (Sesuai Referensi Gambar)
+skinparam class {
+    BorderColor #333333
+    HeaderBackgroundColor #DDDDDD
+    FontStyle bold
+}
+
+' Kelompok Model (Entity/Database) - Hijau
+skinparam class<<Model>> {
+    BackgroundColor #E2F0D9
+    HeaderBackgroundColor #70AD47
+    BorderColor #385723
+    FontColor White
+}
+
+' Kelompok Controller (Process/System) - Biru
+skinparam class<<Controller>> {
+    BackgroundColor #DDEBF7
+    HeaderBackgroundColor #4472C4
+    BorderColor #1F3864
+    FontColor White
+}
+
+' Kelompok Service (AI/External) - Abu-abu
+skinparam class<<Service>> {
+    BackgroundColor #EDEDED
+    HeaderBackgroundColor #767171
+    BorderColor #3B3838
+    FontColor White
+}
+
+' ==========================================
+' MODEL CLASSES (Data Entities)
+' ==========================================
+
+class Pengguna <<Model>> {
+    +id: int
+    +nama: string
+    +email: string
+    +peran: enum
+    --
+    +hasilKuis()
+    +sesiLatihans()
+}
+
+class SesiLatihan <<Model>> {
+    +id: int
+    +user_id: int
+    +kata: string
+    +akurasi: decimal
+    --
+    +pengguna()
+}
+
+class Abjad <<Model>> {
+    +id: int
+    +huruf: string
+    +berkas_video: string
+}
+
+class KataDasar <<Model>> {
+    +id: int
+    +kata: string
+    +kategori: string
+    +berkas_video: string
+}
+
+class Kuis <<Model>> {
+    +id: int
+    +judul: string
+    +deskripsi: string
+}
+
+class HasilKuis <<Model>> {
+    +id: int
+    +skor: int
+    +total_benar: int
+}
+
+class ModeCard <<Model>> {
+    +id: int
+    +judul: string
+    +aktif: boolean
+}
+
+' ==========================================
+' CONTROLLER CLASSES (Process Logic)
+' ==========================================
+
+class LatihanController <<Controller>> {
+    --
+    +tampilDeteksi()
+    +prediksi()
+    +simpanSesi()
+}
+
+class KuisController <<Controller>> {
+    --
+    +tampilKuis()
+    +kerjakan()
+    +submitHasil()
+}
+
+class BerandaController <<Controller>> {
+    --
+    +tampilBeranda()
+}
+
+' ==========================================
+' SERVICE CLASSES (AI & NLG)
+' ==========================================
+
+class ModelInference <<Service>> {
+    +model_path: string
+    --
+    +muatModel()
+    +prediksi()
+}
+
+class PemrosesNLG <<Service>> {
+    --
+    +naturalisasi()
+    +analisisSentimen()
+}
+
+' ==========================================
+' RELASI (SEMUA TERHUBUNG)
+' ==========================================
+
+' Relasi Antar Model (Association)
+Pengguna "1" -- "0..*" SesiLatihan : memiliki >
+Pengguna "1" -- "0..*" HasilKuis : mengerjakan >
+Kuis "1" -- "0..*" HasilKuis : menghasilkan >
+Abjad "1" -- "0..*" SesiLatihan : dipraktekkan >
+KataDasar "1" -- "0..*" SesiLatihan : dipraktekkan >
+
+' Relasi Sistem (Dependency/Usage)
+BerandaController ..> ModeCard : akses
+BerandaController ..> Pengguna : identifikasi
+LatihanController ..> SesiLatihan : rekam
+LatihanController ..> ModelInference : request AI
+KuisController ..> Kuis : ambil kuis
+KuisController ..> HasilKuis : simpan
+
+ModelInference ..> PemrosesNLG : kirim token
+
+@enduml

@@ -1,0 +1,126 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam backgroundColor white
+skinparam linetype ortho
+
+package "Laravel Backpack (MVC)" {
+    
+    package "Controllers" {
+        class AutentikasiController {
+            +tampilFormRegistrasi()
+            +prosesRegistrasi(request)
+            +tampilFormLogin()
+            +prosesLogin(request)
+            +keluar()
+        }
+
+        class LatihanController {
+            +deteksi() : View
+            +predict(request) : Json
+            +saveSession(request) : Json
+            +getHistory(request) : Json
+        }
+
+        class KamusController {
+            +abjad() : View
+            +kataDasar(request) : View
+            +markAsDone(request) : Json
+        }
+
+        class KuisController {
+            +index() : View
+            +show(id) : View
+            +kerjakan(id) : View
+            +submit(request, id) : Redirect
+            +hasil(id, hasil_id) : View
+        }
+        
+        class AdminController {
+             +index()
+             +store()
+             +update()
+             +destroy()
+        }
+    }
+
+    package "Models" {
+        class User {
+            +id : int
+            +nama : string
+            +email : string
+            +password : string
+            +peran : enum
+        }
+
+        class PracticeSession {
+            +id : int
+            +user_id : int
+            +word : string
+            +duration : int
+            +accuracy : float
+            +created_at : datetime
+        }
+
+        class Kuis {
+            +id : int
+            +judul : string
+            +deskripsi : text
+            +gambar : string
+        }
+
+        class Pertanyaan {
+            +id : int
+            +kuis_id : int
+            +pertanyaan : text
+            +media_url : string
+        }
+        
+        class HasilKuis {
+            +id : int
+            +user_id : int
+            +kuis_id : int
+            +skor : int
+        }
+    }
+}
+
+package "Python API Service" {
+    class App {
+        +predict_abjad()
+        +predict_kata()
+        +health_check()
+    }
+    
+    class AbjadHandler {
+        -model : CNN_MobileNetV2
+        +preprocess(image)
+        +predict(image)
+    }
+
+    class KataHandler {
+        -model : LSTM_Ensemble
+        -holistic : MediaPipe
+        +process_frame(image)
+        +detect_motion()
+        +predict_sequence()
+    }
+}
+
+' Relationships
+User "1" -- "0..*" PracticeSession : has >
+User "1" -- "0..*" HasilKuis : takes >
+Kuis "1" *-- "1..*" Pertanyaan : contains >
+Kuis "1" -- "0..*" HasilKuis : records >
+
+LatihanController ..> PracticeSession : creates >
+LatihanController ..> App : requests prediction >
+
+KamusController ..> PracticeSession : creates (manual) >
+
+KuisController ..> Kuis : reads >
+KuisController ..> HasilKuis : creates >
+
+App *-- AbjadHandler
+App *-- KataHandler
+
+@enduml

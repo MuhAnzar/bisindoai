@@ -1,0 +1,46 @@
+@startuml
+skinparam backgroundColor white
+
+start
+
+:Buka Aplikasi;
+
+if (Sudah Login?) then (Tidak)
+    :Halaman Login;
+    if (Punya Akun?) then (Tidak)
+        :Registrasi Akun;
+    endif
+    :Input Kredensial;
+    :Validasi Login;
+else (Ya)
+endif
+
+if (Role == Admin?) then (Ya)
+    :Dashboard Admin;
+    split
+        :Kelola User;
+    split again
+        :Kelola Konten;
+    split again
+        :Kelola Kuis;
+    end split
+else (Tidak / User)
+    :Dashboard User;
+    split
+        :Menu Kamus;
+        :Lihat Video & Materi;
+    split again
+        :Menu Latihan;
+        :Deteksi Real-time;
+    split again
+        :Menu Kuis;
+        :Kerjakan Soal;
+    split again
+        :Riwayat;
+    end split
+endif
+
+:Logout;
+
+stop
+@enduml

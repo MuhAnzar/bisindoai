@@ -1,0 +1,246 @@
+@startuml class_diagram_bisindo
+title Class Diagram: Sistem Pembelajaran BISINDO
+
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam linetype ortho
+skinparam shadowing false
+skinparam monochrome true
+skinparam classAttributeIconSize 0
+
+' ==========================================
+' MODELS
+' ==========================================
+class Pengguna <<Model>> {
+    +id: int
+    +nama: string
+    +email: string
+    +kata_sandi: string
+    +peran: enum
+    +email_terverifikasi_pada: datetime
+    +remember_token: string
+    --
+    +casts() : array
+    +hasilKuis() : HasMany
+    +practiceSessions() : HasMany
+}
+
+class PracticeSession <<Model>> {
+    +id: int
+    +user_id: int
+    +word: string
+    +duration: int
+    +accuracy_percentage: decimal
+    +completed_at: datetime
+    --
+    +user()
+    +getFormattedDuration()
+}
+
+class Abjad <<Model>> {
+    +id: int
+    +huruf: string
+    +deskripsi: string
+    +berkas_video: string
+    --
+    +practices()
+}
+
+class KataDasar <<Model>> {
+    +id: int
+    +kata: string
+    +kategori: string
+    +arti: string
+    +berkas_video: string
+    --
+    +practices()
+}
+
+class Kuis <<Model>> {
+    +id: int
+    +judul: string
+    +deskripsi: string
+    +gambar_sampul: string
+    --
+    +pertanyaans()
+    +hasilKuis()
+}
+
+class Pertanyaan <<Model>> {
+    +id: int
+    +kuis_id: int
+    +pertanyaan: string
+    +media_url: string
+    +tipe_media: string
+    --
+    +kuis()
+    +opsiJawabans()
+}
+
+class OpsiJawaban <<Model>> {
+    +id: int
+    +pertanyaan_id: int
+    +teks_opsi: string
+    +is_benar: boolean
+    --
+    +pertanyaan()
+}
+
+class HasilKuis <<Model>> {
+    +id: int
+    +pengguna_id: int
+    +kuis_id: int
+    +skor: int
+    +total_benar: int
+    --
+    +pengguna()
+    +kuis()
+}
+
+class ModeCard <<Model>> {
+    +id: int
+    +mode_key: string
+    +title: string
+    +description: string
+    +is_active: boolean
+    --
+    +scopeActive()
+    +getDefaults()
+}
+
+' ==========================================
+' CONTROLLERS
+' ==========================================
+class LatihanController <<Controller>> {
+    --
+    +deteksi() : View
+    +predict(request: Request) : JsonResponse
+    +saveSession(request: Request) : JsonResponse
+    +getHistory() : JsonResponse
+}
+
+class KamusController <<Controller>> {
+    --
+    +indexAbjad() : View
+    +indexKataDasar() : View
+}
+
+class KuisController <<Controller>> {
+    --
+    +index() : View
+    +show(kuis: Kuis) : View
+    +kerjakan(kuis: Kuis) : View
+    +submit(request: Request) : RedirectResponse
+    +hasil(hasil: HasilKuis) : View
+}
+
+class AutentikasiController <<Controller>> {
+    --
+    +showFormMasuk() : View
+    +masuk(request: Request) : RedirectResponse
+    +showFormDaftar() : View
+    +daftar(request: Request) : RedirectResponse
+    +keluar() : RedirectResponse
+}
+
+class AdminController <<Controller>> {
+    --
+    +dashboard()
+    +manageAbjad()
+    +manageKataDasar()
+    +manageKuis()
+}
+
+' ==========================================
+' EXTERNAL SERVICES (Python Flask API)
+' ==========================================
+class FlaskApp <<Service>> {
+    +app: Flask
+    +cors: CORS
+    +last_error: string
+    --
+    +predict_abjad() : dict
+    +predict_kata() : dict
+    +nlg_process() : dict
+    +health() : dict
+    +handle_exception(e: Exception) : dict
+}
+
+class AbjadModelHandler <<Service>> {
+    +model: KerasModel
+    +is_ready: boolean
+    -error_log: list
+    --
+    +load_resources() : void
+    +preprocess_image(img: bytes) : tensor
+    +predict(img: tensor) : dict
+    -check_model_state() : boolean
+}
+
+class KataModelHandler <<Service>> {
+    +model: KerasModel
+    +state: string
+    +is_recording: boolean
+    --
+    +load_resources() : void
+    +process_buffer() : tensor
+    +predict(input: any) : dict
+    +reset_session() : void
+    -handle_instability() : void
+}
+
+class KataNLGHandler <<Service>> {
+    +labels: set
+    --
+    +process_kata()
+    +get_rich_feedback()
+}
+
+class KalimatNLGHandler <<Service>> {
+    +labels: set
+    --
+    +naturalize()
+    +analyze_sentiment()
+    +get_conversation_suggestions()
+    +validate_structure()
+}
+
+' ==========================================
+' RELATIONSHIPS
+' ==========================================
+
+' Pengguna relationships
+Pengguna "1" -- "0..*" PracticeSession
+Pengguna "1" -- "0..*" HasilKuis
+
+' Kuis relationships
+Kuis "1" -- "1..*" Pertanyaan
+Kuis "1" -- "0..*" HasilKuis
+Pertanyaan "1" -- "2..*" OpsiJawaban
+
+' Controller dependencies
+LatihanController ..> PracticeSession
+LatihanController ..> ModeCard
+LatihanController ..> FlaskApp
+
+KuisController ..> Kuis
+KuisController ..> HasilKuis
+KuisController ..> Pertanyaan
+
+KamusController ..> Abjad
+KamusController ..> KataDasar
+
+AdminController ..> Abjad
+AdminController ..> KataDasar
+AdminController ..> Kuis
+
+AutentikasiController ..> Pengguna
+
+' Services
+FlaskApp "1" -- "1" AbjadModelHandler
+FlaskApp "1" -- "1" KataModelHandler
+FlaskApp "1" -- "1" KalimatNLGHandler
+KalimatNLGHandler ..> KataNLGHandler : extends
+
+@enduml

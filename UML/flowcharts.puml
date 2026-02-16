@@ -1,0 +1,146 @@
+@startuml flowchart_user
+skinparam backgroundColor white
+title Alur Interaksi Pengguna
+
+start
+:Buka Aplikasi (Landing Page)/;
+ note right: Output (Tampilan)
+
+if (Sudah Login?) then (Belum)
+  :Halaman Login/;
+  note right: Output
+  
+  if (Punya Akun?) then (Tidak)
+    :Halaman Daftar/;
+    note right: Output
+    :Isi Form Registrasi<;
+    note right: Input
+    :Submit Data];
+    note right: Proses
+  endif
+  :Input Kredensial (Login)<;
+  note right: Input
+else (Ya)
+endif
+
+:Dashboard Pengguna/;
+note right: Output
+
+fork
+  :Akses Kamus/>;
+  note right: I/O (Navigasi)
+  :Lihat Daftar Abjad/Kata/;
+  :Tandai Selesai];
+fork again
+  :Akses Latihan/>;
+  if (Pilih Mode?) then (Abjad)
+    :Mode Latihan Abjad];
+  elseif (Kata)
+    :Mode Latihan Kata];
+  else (Kalimat)
+    :Mode Latihan Kalimat];
+  endif
+fork again
+  :Akses Kuis/>;
+  :Pilih Topik Kuis<;
+  :Kerjakan Soal<;
+  :Submit Jawaban];
+  :Lihat Hasil & Skor/;
+fork again
+  :Lihat Riwayat Latihan/;
+end fork
+
+stop
+@enduml
+
+@startuml flowchart_admin
+skinparam backgroundColor white
+title Alur Admin
+
+start
+:Input Login Admin<;
+:Validasi Login];
+:Dashboard Admin/;
+
+split
+  :Manajemen User];
+  :CRUD User (Tambah/Edit/Hapus)] |
+split again
+  :Manajemen Konten];
+  :CRUD Abjad/Kata/Kuis] |
+split again
+  :Analitik];
+  :Tampil Statistik/;
+split again
+  :Manajemen Model AI];
+  :Update Parameter Model];
+split again
+  :Pengaturan Aplikasi];
+end split
+
+stop
+@enduml
+
+@startuml flowchart_latihan_detail
+skinparam backgroundColor white
+title Detail Alur Mode Latihan
+
+start
+:Klik Mulai Latihan<;
+
+if (Izin Kamera Diberikan?) then (Tidak)
+  :Minta Akses Kamera/output;
+  if (Diizinkan?) then (Tidak)
+    :Tampilkan Pesan Error/;
+    stop
+  endif
+endif
+
+:Inisialisasi AI (MediaPipe)] process;
+:Tampil Pilihan Mode/;
+
+if (Mode yang Dipilih?) then (Mode Abjad)
+  partition "Mode Abjad" {
+    :Input Kata Target<;
+    repeat
+      :Tampilkan Huruf Target/;
+      :Deteksi Tangan User] process;
+    repeat while (Gerakan Sesuai?) is (Tidak)
+    :Lanjut ke Huruf Berikutnya];
+    if (Kata Selesai?) then (Ya)
+    else (Tidak)
+    endif
+  }
+elseif (Mode Kata)
+  partition "Mode Kata" {
+    :Pilih Kartu Kata<;
+    :Tampilkan Panduan Video/;
+    repeat
+      :Deteksi Gerakan Tubuh] process;
+    repeat while (Gerakan Sesuai?) is (Tidak)
+  }
+else (Mode Kalimat)
+  partition "Mode Kalimat" {
+    :Pilih Kata & Input Ejaan<;
+    :Proses Susun Kalimat];
+    repeat
+      :Tampilkan Item Target/;
+      :Deteksi Gerakan] process;
+    repeat while (Gerakan Sesuai?) is (Tidak)
+    :Lanjut Item Berikutnya];
+  }
+endif
+
+:Sesi Selesai];
+:Hitung Akurasi & Durasi] process;
+:Simpan ke Database] database;
+:Tampilkan Layar Hasil/;
+
+if (Aksi Selanjutnya?) then (Menu Utama)
+  :Navigasi ke Dashboard];
+else (Coba Lagi)
+  :Reset Sesi];
+endif
+
+stop
+@enduml

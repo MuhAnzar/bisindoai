@@ -1,0 +1,445 @@
+@startuml activity_registrasi_user
+skinparam monochrome true
+skinparam shadowing false
+skinparam backgroundColor white
+
+skinparam swimlane {
+    BorderColor black
+    BorderThickness 1
+    TitleBackgroundColor white
+    TitleFontColor black
+}
+
+legend right
+  | **No** | **Simbol Visual** |
+  | 1-3 | Action (Persegi) |
+  | 4 | Decision (Belah Ketupat) |
+  | 5-8 | Action (Persegi) |
+endlegend
+
+|User|
+start
+:1. Buka Halaman Registrasi;
+:2. Isi Form Registrasi;
+:3. Klik Tombol Daftar;
+
+|Sistem|
+if (4. Validasi Data?) then (Tidak Valid)
+  :5. Tampilkan Pesan Error;
+  |User|
+  :6. Perbaiki Data;
+  detach
+else (Valid)
+  |Sistem|
+  :7. Simpan Data User;
+  :8. Redirect ke Halaman Login;
+endif
+
+stop
+@enduml
+
+@startuml activity_login_user
+skinparam monochrome true
+skinparam shadowing false
+skinparam backgroundColor white
+
+skinparam swimlane {
+    BorderColor black
+    BorderThickness 1
+    TitleBackgroundColor white
+    TitleFontColor black
+}
+
+legend right
+  | **No** | **Simbol Visual** |
+  | 1-4 | Action (Persegi) |
+  | 5 | Decision (Belah Ketupat) |
+  | 6-7 | Action (Persegi) |
+  | 8 | Decision (Belah Ketupat) |
+  | 9A/B | Action (Persegi) |
+endlegend
+
+|User|
+start
+:1. Buka Halaman Login;
+:2. Input Email & Password;
+:3. Klik Tombol Masuk;
+
+|Sistem|
+:4. Proses Autentikasi;
+
+if (5. Login Berhasil?) then (Gagal)
+  :6. Tampilkan Pesan Error;
+  |User|
+  :7. Input Ulang;
+  detach
+else (Berhasil)
+  |Sistem|
+  if (8. Cek Role User?) then (Admin)
+    :9A. Redirect ke\nDashboard Admin;
+  else (User)
+    :9B. Redirect ke\nDashboard User;
+  endif
+endif
+
+stop
+@enduml
+
+@startuml activity_kamus
+skinparam monochrome true
+skinparam shadowing false
+skinparam backgroundColor white
+
+skinparam swimlane {
+    BorderColor black
+    BorderThickness 1
+    TitleBackgroundColor white
+    TitleFontColor black
+}
+
+legend right
+  | **No** | **Simbol Visual** |
+  | 1-5 | Action (Persegi) |
+  | 6 | Decision (Belah Ketupat) |
+  | 7-10 | Action (Persegi) |
+endlegend
+
+|User|
+start
+:1. Pilih Menu Kamus;
+:2. Pilih Kategori\n(Abjad / Kata Dasar);
+:3. Pilih Item Isyarat;
+
+|Sistem|
+:4. Ambil Data Video;
+:5. Tampilkan Video & Penjelasan;
+
+|User|
+if (6. Selesai Belajar?) then (Ya)
+  :7. Klik Tombol\nTandai Selesai;
+  |Sistem|
+  :8. Update Progress User;
+  :9. Tampilkan Notifikasi Sukses;
+else (Tidak)
+  |User|
+  :10. Kembali ke Menu;
+endif
+
+stop
+@enduml
+
+@startuml activity_latihan_abjad
+skinparam monochrome true
+skinparam shadowing false
+skinparam backgroundColor white
+
+skinparam swimlane {
+    BorderColor black
+    BorderThickness 1
+    TitleBackgroundColor white
+    TitleFontColor black
+}
+
+legend right
+  | **No** | **Simbol Visual** |
+  | 1-3 | Action (Persegi) |
+  | 4-7 | Action (Persegi) |
+  | 8 | Decision (Belah Ketupat) |
+  | 9-12 | Action (Persegi) |
+endlegend
+
+|User|
+start
+:1. Pilih Menu Latihan;
+:2. Pilih Mode **Abjad**;
+:3. Input Kata Target;
+
+|Sistem|
+:4. Tampilkan Huruf Target;
+
+repeat
+  |User|
+  :5. Lakukan Isyarat Tangan;
+  |Sistem|
+  :6. Smart Crop & Klasifikasi Citra (CV);
+  :7. Validasi Huruf;
+repeat while (8. Huruf Sesuai?) is (Tidak)
+
+:9. Lanjut Huruf Berikutnya;
+:10. Hitung Akurasi & Waktu;
+:11. Simpan Riwayat Latihan;
+:12. Tampilkan Hasil & Evaluasi;
+
+stop
+@enduml
+
+@startuml activity_latihan_kata
+skinparam monochrome true
+skinparam shadowing false
+skinparam backgroundColor white
+
+skinparam swimlane {
+    BorderColor black
+    BorderThickness 1
+    TitleBackgroundColor white
+    TitleFontColor black
+}
+
+legend right
+  | **No** | **Simbol Visual** |
+  | 1-4 | Action (Persegi) |
+  | 5-7 | Action (Persegi) |
+  | 8 | Decision (Belah Ketupat) |
+  | 9-11 | Action (Persegi) |
+endlegend
+
+|User|
+start
+:1. Pilih Menu Latihan;
+:2. Pilih Mode **Kata**;
+:3. Pilih Kartu Kata;
+
+repeat
+  :4. Lakukan Isyarat Kata;
+  |Sistem|
+  :5. Deteksi Pose & Tangan (Model AI);
+  :6. Validasi Kata (Top 5);
+repeat while (7. Kata Sesuai?) is (Tidak)
+
+:8. Hitung Akurasi & Waktu;
+:9. Simpan Riwayat Latihan;
+:10. Tampilkan Hasil & Evaluasi;
+
+stop
+@enduml
+
+@startuml activity_latihan_kalimat
+skinparam monochrome true
+skinparam shadowing false
+
+skinparam backgroundColor white
+
+skinparam swimlane {
+    BorderColor black
+    BorderThickness 1
+    TitleBackgroundColor white
+    TitleFontColor black
+}
+
+legend right
+  | **No** | **Simbol Visual** |
+  | 1-3 | Action (Persegi) |
+  | 4 | Decision (Belah Ketupat) |
+  | 5-7 | Action (Persegi) |
+  | 8 | Decision (Belah Ketupat) |
+  | 9 | Action (Persegi) |
+  | 10 | Decision (Belah Ketupat) |
+  | 11-13 | Action (Persegi) |
+endlegend
+
+|User|
+start
+:1. Pilih Menu Latihan;
+:2. Pilih Mode **Kalimat**;
+:3. Tambah Kata / Ejaan ke Daftar;
+
+|Sistem|
+while (4. Masih Ada Item?) is (Ya)
+  |User|
+  repeat
+    :5. Lakukan Isyarat Item Aktif;
+    |Sistem|
+    :6. Deteksi Adaptif (Abjad/Kata);
+    :7. Validasi Item Urutan;
+  repeat while (8. Item Sesuai?) is (Tidak)
+  
+  :9. Lanjut ke Item Berikutnya;
+endwhile (Tidak)
+
+:11. Hitung Akurasi & Waktu;
+:12. Simpan Riwayat Latihan;
+:13. Tampilkan Hasil & Evaluasi;
+
+stop
+@enduml
+
+@startuml activity_kuis
+skinparam monochrome true
+skinparam shadowing false
+skinparam backgroundColor white
+
+skinparam swimlane {
+    BorderColor black
+    BorderThickness 1
+    TitleBackgroundColor white
+    TitleFontColor black
+}
+
+legend right
+  | **No** | **Simbol Visual** |
+  | 1-6 | Action (Persegi) |
+  | 7 | Decision (Belah Ketupat) |
+  | 8-11 | Action (Persegi) |
+endlegend
+
+|User|
+start
+:1. Pilih Menu Kuis;
+:2. Pilih Paket Soal;
+:3. Klik Mulai;
+
+|Sistem|
+:4. Generate Soal Random;
+
+repeat
+  |Sistem|
+  :5. Tampilkan Soal Video;
+  
+  |User|
+  :6. Pilih Jawaban;
+repeat while (7. Masih Ada Soal?) is (Ya)
+->Tidak;
+
+|User|
+:8. Submit Jawaban;
+
+|Sistem|
+:9. Hitung Skor Akhir;
+:10. Simpan Hasil ke Database;
+:11. Tampilkan Halaman Hasil;
+
+stop
+@enduml
+
+@startuml activity_manajemen_user
+skinparam monochrome true
+skinparam shadowing false
+skinparam backgroundColor white
+
+skinparam swimlane {
+    BorderColor black
+    BorderThickness 1
+    TitleBackgroundColor white
+    TitleFontColor black
+}
+
+legend right
+  | **No** | **Simbol Visual** |
+  | 1-2 | Action (Persegi) |
+  | 3 | Decision (Belah Ketupat) |
+  | 4A-6 | Action (Persegi) |
+endlegend
+
+|Admin|
+start
+:1. Login sebagai Admin;
+:2. Masuk Menu User;
+
+if (3. Pilih Aksi?) then (Tambah)
+  :4A. Input Data User Baru;
+  |Sistem|
+  :5A. Simpan Data User;
+elseif (Edit)
+  |Admin|
+  :4B. Edit Data User;
+  |Sistem|
+  :5B. Update Data User;
+elseif (Hapus)
+  |Admin|
+  :4C. Konfirmasi Hapus;
+  |Sistem|
+  :5C. Hapus Data User;
+endif
+
+|Sistem|
+:6. Refresh Tabel User;
+
+stop
+@enduml
+
+@startuml activity_manajemen_konten
+skinparam monochrome true
+skinparam shadowing false
+skinparam backgroundColor white
+
+skinparam swimlane {
+    BorderColor black
+    BorderThickness 1
+    TitleBackgroundColor white
+    TitleFontColor black
+}
+
+legend right
+  | **No** | **Simbol Visual** |
+  | 1-2 | Action (Persegi) |
+  | 3 | Decision (Belah Ketupat) |
+  | 4A-7 | Action (Persegi) |
+endlegend
+
+|Admin|
+start
+:1. Login sebagai Admin;
+:2. Masuk Menu Konten;
+
+if (3. Pilih Aksi?) then (Upload)
+  :4A. Upload Video & Data;
+  |Sistem|
+  :5A. Simpan File Cloud;
+  :6A. Simpan Record DB;
+elseif (Edit)
+  |Admin|
+  :4B. Edit Informasi;
+  |Sistem|
+  :5B. Update Record DB;
+elseif (Hapus)
+  |Admin|
+  :4C. Hapus Konten;
+  |Sistem|
+  :5C. Hapus File & Data;
+endif
+
+|Sistem|
+:7. Tampilkan Notifikasi;
+
+stop
+@enduml
+
+@startuml activity_upload_model
+skinparam monochrome true
+skinparam shadowing false
+skinparam backgroundColor white
+
+skinparam swimlane {
+    BorderColor black
+    BorderThickness 1
+    TitleBackgroundColor white
+    TitleFontColor black
+}
+
+legend right
+  | **No** | **Simbol Visual** |
+  | 1-4 | Action (Persegi) |
+  | 5 | Decision (Belah Ketupat) |
+  | 6-9 | Action (Persegi) |
+endlegend
+
+|Admin|
+start
+:1. Masuk Menu Model AI;
+:2. Upload File Model (.h5);
+:3. Upload File Label (.json);
+:4. Klik Save Configuration;
+
+|Sistem|
+if (5. Validasi File?) then (Valid)
+  :6. Backup Model Lama;
+  :7. Simpan Model Baru;
+  :8. Reload API Flask;
+  :9. Tampilkan Pesan Sukses;
+else (Invalid)
+  :6B. Tampilkan Pesan Error;
+  detach
+endif
+
+stop
+@enduml

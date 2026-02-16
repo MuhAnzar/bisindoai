@@ -1,0 +1,51 @@
+@startuml
+skinparam backgroundColor white
+participant "User" as U
+participant "Browser (Frontend)" as FE
+participant "LatihanController\n(Laravel)" as BE
+participant "Python API\n(Flask)" as AI
+database "Database" as DB
+
+activate U
+U -> FE : Buka Menu Latihan
+activate FE
+FE -> BE : GET /latihan/deteksi
+activate BE
+BE --> FE : Return View (HTML/JS)
+deactivate BE
+
+FE -> FE : Init Camera & MediaPipe
+U -> FE : Lakukan Gerakan Isyarat
+
+loop Real-time Frame Processing
+    FE -> FE : Capture Frame
+    FE -> AI : POST /predict (Base64 Image)
+    activate AI
+    AI -> AI : Preprocess & Inference
+    AI --> FE : JSON {label, confidence}
+    deactivate AI
+    
+    FE -> FE : Validasi Gerakan (Client-side)
+    
+    alt Gerakan Benar
+        FE --> U : Tampilkan Feedback "Benar!"
+    else Gerakan Salah
+        FE --> U : Feedback "Coba Lagi"
+    end
+end
+
+U -> FE : Selesai Latihan
+FE -> BE : POST /latihan/save-session\n{word, duration, accuracy}
+activate BE
+BE -> DB : INSERT INTO practice_sessions
+activate DB
+DB --> BE : Success
+deactivate DB
+BE --> FE : Result OK
+deactivate BE
+
+FE --> U : Tampilkan Ringkasan Hasil
+deactivate FE
+deactivate U
+
+@enduml

@@ -1,0 +1,153 @@
+@startuml database_schema_bisindo
+!define TABLE(name) entity name << (T,#2574A9) >>
+!define PK(column) <b>column</b> <&key>
+!define FK(column) column <&link-intact>
+!define NN(column) column
+
+title Database Schema: Sistem Pembelajaran BISINDO
+
+skinparam backgroundColor #FFFFFF
+skinparam entity {
+    BackgroundColor #FFFFFF
+    BorderColor #2574A9
+    ArrowColor #2574A9
+}
+skinparam entityHeader {
+    BackgroundColor #2574A9
+    FontColor #FFFFFF
+}
+skinparam linetype ortho
+
+' ==========================================
+' USER MANAGEMENT
+' ==========================================
+TABLE(users) {
+    PK(id) : bigint
+    --
+    nama : varchar
+    email : varchar
+    email_verified_at : timestamp
+    password : varchar
+    role : enum(pengguna,admin)
+    remember_token : varchar
+    created_at : timestamp
+    updated_at : timestamp
+}
+
+TABLE(practice_sessions) {
+    PK(id) : bigint
+    --
+    FK(user_id) : bigint NN
+    word : varchar
+    duration : int
+    accuracy_percentage : decimal(5,2)
+    completed_at : timestamp
+    created_at : timestamp
+    updated_at : timestamp
+}
+
+' ==========================================
+' MATERI PEMBELAJARAN
+' ==========================================
+TABLE(abjads) {
+    PK(id) : bigint
+    --
+    huruf : varchar(5)
+    deskripsi : text
+    berkas_video : varchar(500)
+    created_at : timestamp
+    updated_at : timestamp
+}
+
+TABLE(kata_dasars) {
+    PK(id) : bigint
+    --
+    kata : varchar
+    kategori : varchar
+    arti : text
+    berkas_video : varchar(500)
+    created_at : timestamp
+    updated_at : timestamp
+}
+
+' ==========================================
+' KUIS MODULE
+' ==========================================
+TABLE(kuis) {
+    PK(id) : bigint
+    --
+    judul : varchar
+    deskripsi : text
+    gambar_sampul : varchar(500)
+    created_at : timestamp
+    updated_at : timestamp
+}
+
+TABLE(pertanyaans) {
+    PK(id) : bigint
+    --
+    FK(kuis_id) : bigint NN
+    pertanyaan : text
+    media_url : varchar(500)
+    tipe_media : varchar
+    created_at : timestamp
+    updated_at : timestamp
+}
+
+TABLE(opsi_jawabans) {
+    PK(id) : bigint
+    --
+    FK(pertanyaan_id) : bigint NN
+    teks_opsi : varchar
+    is_benar : boolean
+    created_at : timestamp
+    updated_at : timestamp
+}
+
+TABLE(hasil_kuis) {
+    PK(id) : bigint
+    --
+    FK(pengguna_id) : bigint NN
+    FK(kuis_id) : bigint NN
+    skor : int
+    total_benar : int
+    tanggal_dikerjakan : timestamp
+    created_at : timestamp
+    updated_at : timestamp
+}
+
+' ==========================================
+' MODE CARDS CONFIGURATION
+' ==========================================
+TABLE(mode_cards) {
+    PK(id) : bigint
+    --
+    mode_key : varchar
+    title : varchar
+    description : text
+    badge_text : varchar
+    gradient_from : varchar
+    gradient_to : varchar
+    icon_type : varchar
+    icon_content : text
+    features : json
+    button_text : varchar
+    image : varchar(500)
+    is_active : boolean
+    sort_order : int
+    created_at : timestamp
+    updated_at : timestamp
+}
+
+' ==========================================
+' RELATIONSHIPS
+' ==========================================
+
+users ||--o{ practice_sessions
+users ||--o{ hasil_kuis
+
+kuis ||--|{ pertanyaans
+kuis ||--o{ hasil_kuis
+pertanyaans ||--|{ opsi_jawabans
+
+@enduml
