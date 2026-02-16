@@ -1,2 +1,5 @@
-*
 !.gitignore
+!models/
+!profile-photos/
+!uploads/
+!mode_cards/
